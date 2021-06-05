@@ -10,10 +10,12 @@ export class OilComponent implements OnInit {
 
     dbPromise: any
     username: string  = ''
+    price: number = 600
 
     constructor() { }
 
         ngOnInit(): void {
+            this.changePriceByTimeout();
             this.dbPromise = openDB('module-federation', 1, {
                 upgrade(db) {
                     db.createObjectStore('host');
@@ -21,6 +23,16 @@ export class OilComponent implements OnInit {
             });
             this.setOilFlag()
             this.setUserName()
+        }
+
+        changePriceByTimeout(): void {
+            
+            setInterval(() => {
+                const randomNumber = Math.round(Math.random() * 2 - 0.9);
+
+            console.log(randomNumber)
+                this.price+= randomNumber
+            }, 1000);
         }
 
         async setOilFlag() {
