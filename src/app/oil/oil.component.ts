@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {openDB} from "idb";
 
 @Component({
   selector: 'app-oil',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OilComponent implements OnInit {
 
-  constructor() { }
+    dbPromise: any
 
-  ngOnInit(): void {
-  }
+    constructor() { }
 
+        ngOnInit(): void {
+            this.dbPromise = openDB('module-federation', 1, {
+                upgrade(db) {
+                    db.createObjectStore('remote2');
+                },
+            });
+            this.setOilFlag()
+        }
+
+        async setOilFlag() {
+            (await this.dbPromise).put('remote2', true, 'oil')
+        }
 }
