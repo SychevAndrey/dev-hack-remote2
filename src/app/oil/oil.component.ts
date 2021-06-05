@@ -9,6 +9,7 @@ import {openDB} from "idb";
 export class OilComponent implements OnInit {
 
     dbPromise: any
+    username: string  = ''
 
     constructor() { }
 
@@ -19,9 +20,14 @@ export class OilComponent implements OnInit {
                 },
             });
             this.setOilFlag()
+            this.setUserName()
         }
 
         async setOilFlag() {
             (await this.dbPromise).put('host', true, 'oil')
+        }
+
+        async setUserName() {
+            (await this.dbPromise).get('host', 'user').then((value: string) => this.username = value)
         }
 }
