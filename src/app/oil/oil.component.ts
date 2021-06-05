@@ -15,13 +15,13 @@ export class OilComponent implements OnInit {
         ngOnInit(): void {
             this.dbPromise = openDB('module-federation', 1, {
                 upgrade(db) {
-                    db.createObjectStore('remote2');
+                    db.createObjectStore('host');
                 },
             });
             this.setOilFlag()
         }
 
         async setOilFlag() {
-            (await this.dbPromise).put('remote2', true, 'oil')
+            (await this.dbPromise).put('host', true, 'oil')
         }
 }
