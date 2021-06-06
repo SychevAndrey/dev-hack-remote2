@@ -30,6 +30,7 @@ export class BTCComponent implements OnInit {
     this.idInterval = setInterval(() => {
         const randomNumber = Math.round(Math.random() * 100 - 0.9);
         this.price+= randomNumber
+        this.canBuy = Math.round(this.cash / this.price);
     }, 1000);
   }
 
