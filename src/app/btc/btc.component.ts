@@ -14,7 +14,7 @@ export class BTCComponent implements OnInit {
   price = 35000;
   idInterval: any;
   cash: number = 0
-    canBuy: number = 0
+  canBuy: number = 0
 
   ngOnInit(): void {
     this.changePriceByTimeout();
@@ -36,7 +36,12 @@ export class BTCComponent implements OnInit {
 
 
   async setUserCash() {
-      (await this.dbPromise).get('host', 'cash').then((value: number) => this.cash = value)
+      (await this.dbPromise).get('host', 'cash').then((value: any) => {
+        if (!value) {
+          return
+        }
+        this.cash = value
+      })
   }
 
   ngOnDestroy(): void {

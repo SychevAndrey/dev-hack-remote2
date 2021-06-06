@@ -36,12 +36,18 @@ export class OilComponent implements OnInit {
         changePriceByTimeout(): void {            
             this.idInterval = setInterval(() => {                
                 this.canBuy = Math.round(this.cash / this.price);
+                
             }, 1000);
         }
 
 
 
         async setUserCash() {
-            (await this.dbPromise).get('host', 'cash').then((value: number) => this.cash = value)
+            (await this.dbPromise).get('host', 'cash').then((value: number) => {
+                if (!value) {
+                    return
+                  }
+                  this.cash = value
+                this.cash = value})
         }
 }
