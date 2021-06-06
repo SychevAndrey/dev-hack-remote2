@@ -9,7 +9,6 @@ import {openDB} from "idb";
 export class OilComponent implements OnInit {
 
     dbPromise: any
-    username: string  = ''
     price: number = 60
     idInterval: any
     cash: number = 0
@@ -24,7 +23,6 @@ export class OilComponent implements OnInit {
                     db.createObjectStore('host');
                 },
             });
-            this.setOilFlag()
             this.setUserCash()
         }
 
@@ -36,16 +34,12 @@ export class OilComponent implements OnInit {
 
 
         changePriceByTimeout(): void {            
-            this.idInterval = setInterval(() => {
-                const randomNumber = Math.round(Math.random() * 2 - 0.9);
-                this.price+= randomNumber
+            this.idInterval = setInterval(() => {                
                 this.canBuy = Math.round(this.cash / this.price);
             }, 1000);
         }
 
-        async setOilFlag() {
-            (await this.dbPromise).put('host', true, 'oil')
-        }
+
 
         async setUserCash() {
             (await this.dbPromise).get('host', 'cash').then((value: number) => this.cash = value)
