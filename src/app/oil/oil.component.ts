@@ -44,10 +44,8 @@ export class OilComponent implements OnInit {
 
         async setUserCash() {
             (await this.dbPromise).get('host', 'cash').then((value: number) => {
-                if (!value) {
-                    return
-                  }
-                  this.cash = value
-                this.cash = value})
+                if (!value) return                  
+                this.cash = value
+            })
         }
 }

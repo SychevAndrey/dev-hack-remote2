@@ -37,9 +37,7 @@ export class BTCComponent implements OnInit {
 
   async setUserCash() {
       (await this.dbPromise).get('host', 'cash').then((value: any) => {
-        if (!value) {
-          return
-        }
+        if (!value) return
         this.cash = value
       })
   }
