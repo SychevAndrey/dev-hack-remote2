@@ -13,6 +13,7 @@ export class OilComponent implements OnInit {
     price: number = 60
     idInterval: any
     cash: number = 0
+    canBuy: number = 0
 
     constructor() { }
 
@@ -38,6 +39,7 @@ export class OilComponent implements OnInit {
             this.idInterval = setInterval(() => {
                 const randomNumber = Math.round(Math.random() * 2 - 0.9);
                 this.price+= randomNumber
+                this.canBuy = Math.round(this.cash / this.price);
             }, 1000);
         }
 
