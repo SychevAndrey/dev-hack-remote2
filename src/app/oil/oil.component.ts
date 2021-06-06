@@ -11,7 +11,7 @@ export class OilComponent implements OnInit {
 
     dbPromise: any
     username: string  = ''
-    price: number = 600
+    price: number = 60
     idInterval: any;
 
     constructor() { }
@@ -37,8 +37,6 @@ export class OilComponent implements OnInit {
         changePriceByTimeout(): void {            
             this.idInterval = setInterval(() => {
                 const randomNumber = Math.round(Math.random() * 2 - 0.9);
-
-            console.log(randomNumber)
                 this.price+= randomNumber
             }, 1000);
         }
