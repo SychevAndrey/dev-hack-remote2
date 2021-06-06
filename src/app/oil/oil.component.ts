@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {openDB} from "idb";
-import { TimeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-oil',
@@ -12,7 +11,8 @@ export class OilComponent implements OnInit {
     dbPromise: any
     username: string  = ''
     price: number = 60
-    idInterval: any;
+    idInterval: any
+    cash: number = 0
 
     constructor() { }
 
@@ -24,7 +24,7 @@ export class OilComponent implements OnInit {
                 },
             });
             this.setOilFlag()
-            this.setUserName()
+            this.setUserCash()
         }
 
         ngOnDestroy(): void {
@@ -45,7 +45,7 @@ export class OilComponent implements OnInit {
             (await this.dbPromise).put('host', true, 'oil')
         }
 
-        async setUserName() {
-            (await this.dbPromise).get('host', 'user').then((value: string) => this.username = value)
+        async setUserCash() {
+            (await this.dbPromise).get('host', 'cash').then((value: number) => this.cash = value)
         }
 }
