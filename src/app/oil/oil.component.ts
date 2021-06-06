@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {openDB} from "idb";
+import { TimeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-oil',
@@ -11,6 +12,7 @@ export class OilComponent implements OnInit {
     dbPromise: any
     username: string  = ''
     price: number = 600
+    idInterval: any;
 
     constructor() { }
 
@@ -25,9 +27,15 @@ export class OilComponent implements OnInit {
             this.setUserName()
         }
 
-        changePriceByTimeout(): void {
-            
-            setInterval(() => {
+        ngOnDestroy(): void {
+            if (this.idInterval) {
+                clearInterval(this.idInterval);
+              }
+        }
+
+
+        changePriceByTimeout(): void {            
+            this.idInterval = setInterval(() => {
                 const randomNumber = Math.round(Math.random() * 2 - 0.9);
 
             console.log(randomNumber)
